@@ -61,4 +61,18 @@ export class UserService {
         //         return x;
         //     }));
     }
+
+    saveCategory(data) {
+        return this.httpService.post(`user/login`, data)
+        .pipe(map(category => {
+            return category;
+        }));
+    }
+
+    getCategory() {
+        return this.httpService.post(`user/login`)
+        .pipe(map(category => {
+            return category;
+        }));
+    }
 }

@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+    </div>
+    <div class="col-md-5">
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-md btn-danger" (click)="logout()">
+        Logout
+      </button>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <h2>Category List</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let list of categoryList">
+            <td>{{list.name}}</td>
+            <td>
+              <button type="submit" class="btn btn-md btn-danger" (click)="deleteCategory(list.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+          <tr class="text-center" *ngIf="categoryList.length === 0">
+            <td colspan="4">No Records Found.</td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-lg btn-outline-primary addProduct" (click)="open(mymodal)">Add Category</button>
+
+      <ng-template #mymodal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Categgory Modal</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="categoryForm" (ngSubmit)="submitCategoryForm(categoryForm.value)">
+            <div class="form-group">
+              <label for="">Category Name *</label>
+              <input type="text" formControlName="name" placeholder="Enter product name" class="form-control">
+              <p *ngIf="isSubmitted && !!categoryFormControls.name.errors.required">
+                Please enter category name
+              </p>
+            </div>
+            <button type="submit" [disabled]="!categoryForm.valid" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </ng-template>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+</div>
